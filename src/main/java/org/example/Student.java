@@ -26,4 +26,13 @@ public class Student {
 
     public Student() {
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "matrikelnummer=" + matrikelnummer +
+                ", vorname='" + vorname + '\'' +
+                ", nachname='" + nachname + '\'' +
+                '}';
+    }
 }

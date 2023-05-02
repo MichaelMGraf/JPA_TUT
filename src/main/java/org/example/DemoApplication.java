@@ -17,17 +17,23 @@ public class DemoApplication {
 
 
 	@Bean
-	CommandLineRunner commandLineRunner (StudentRepo studentRepo) {
+	CommandLineRunner commandLineRunner (StudentRepo studentRepo, HochschuleRepo hochschuleRepo) {
 		return args -> {
 			try {
-				studentRepo.save(new Student("David", "Schulz"));
-				studentRepo.save(new Student("Jens", "Knossalla"));
-				studentRepo.save(new Student("Heinz", "Richard"));
-				studentRepo.save(new Student("Richard", "Heinz"));
+				Hochschule dhbw_ka = new Hochschule("DHBW KA");
+				hochschuleRepo.save(dhbw_ka);
+
+				studentRepo.save(new Student("David", "Schulz", dhbw_ka));
+				studentRepo.save(new Student("Jens", "Knossalla", dhbw_ka));
+				studentRepo.save(new Student("Heinz", "Richard", dhbw_ka));
+				studentRepo.save(new Student("Richard", "Heinz", dhbw_ka));
 
 				System.out.println(studentRepo.findMatrikelnummerMax().get());
 				System.out.println(studentRepo.findByMatrikelnummer(5291383).get());
-				System.out.println(studentRepo.findMatrikelnummerMin().get());
+				//System.out.println(studentRepo.findMatrikelnummerMin().get());
+
+				System.out.println(hochschuleRepo.findById(1L).get().getStudenten());
+
 			} catch (DataIntegrityViolationException e) {
 			}
 		};

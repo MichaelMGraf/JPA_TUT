@@ -17,10 +17,14 @@ public class Student {
     @Column
     private String nachname;
 
+    @ManyToOne
+    private Hochschule hochschule;
 
-    public Student(String vorname, String nachname) {
+
+    public Student(String vorname, String nachname, Hochschule hochschule) {
         this.vorname = vorname;
         this.nachname = nachname;
+        this.hochschule = hochschule;
     }
 
     public Student() {
@@ -32,6 +36,7 @@ public class Student {
                 "matrikelnummer=" + matrikelnummer +
                 ", vorname='" + vorname + '\'' +
                 ", nachname='" + nachname + '\'' +
+                ", hochschule=" + hochschule +
                 '}';
     }
 }

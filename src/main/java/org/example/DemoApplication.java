@@ -20,10 +20,10 @@ public class DemoApplication {
 	CommandLineRunner commandLineRunner (StudentRepo studentRepo) {
 		return args -> {
 			try {
-				studentRepo.save(new Student(5291382, "David", "Schulz"));
-				studentRepo.save(new Student(5291383, "Jens", "Knossalla"));
-				studentRepo.save(new Student(5291384, "Heinz", "Richard"));
-				studentRepo.save(new Student(5291385, "Richard", "Heinz"));
+				studentRepo.save(new Student("David", "Schulz"));
+				studentRepo.save(new Student("Jens", "Knossalla"));
+				studentRepo.save(new Student("Heinz", "Richard"));
+				studentRepo.save(new Student("Richard", "Heinz"));
 
 				System.out.println(studentRepo.findMatrikelnummerMax().get());
 				System.out.println(studentRepo.findByMatrikelnummer(5291383).get());

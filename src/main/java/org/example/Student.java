@@ -1,14 +1,14 @@
 package org.example;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@SequenceGenerator(name = "matrikelnummer_sequenz", initialValue = 5291380)
 public class Student {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "matrikelnummer_sequenz")
     private Long matrikelnummer;
 
     @Column
@@ -18,8 +18,7 @@ public class Student {
     private String nachname;
 
 
-    public Student(long matrikelnummer, String vorname, String nachname) {
-        this.matrikelnummer = matrikelnummer;
+    public Student(String vorname, String nachname) {
         this.vorname = vorname;
         this.nachname = nachname;
     }

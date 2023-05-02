@@ -12,10 +12,10 @@ public class Hochschule {
     @GeneratedValue
     private long id;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
-    @OneToOne
+    @OneToOne(optional = false)
     private Stadt stadt;
 
     @OneToMany(mappedBy = "hochschule")

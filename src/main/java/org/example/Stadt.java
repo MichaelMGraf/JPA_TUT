@@ -9,7 +9,7 @@ public class Stadt {
     @GeneratedValue
     private long id;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
     @OneToOne(mappedBy = "stadt")

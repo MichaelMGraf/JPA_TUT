@@ -40,7 +40,14 @@ public class DemoApplication {
 
 				System.out.println(hochschuleRepo.findById(1L).get());
 
+				Stadt mannheim = new Stadt("Mannheim");
+				stadtRepo.save(mannheim);
+				Hochschule dhbw_ma = new Hochschule("DHBW MA");
+				dhbw_ma.setStadt(mannheim);
+				hochschuleRepo.save(dhbw_ma);
+
 			} catch (DataIntegrityViolationException e) {
+				e.printStackTrace();
 			}
 		};
 	}

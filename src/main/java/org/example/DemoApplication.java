@@ -17,10 +17,14 @@ public class DemoApplication {
 
 
 	@Bean
-	CommandLineRunner commandLineRunner (StudentRepo studentRepo, HochschuleRepo hochschuleRepo) {
+	CommandLineRunner commandLineRunner (StudentRepo studentRepo, HochschuleRepo hochschuleRepo, StadtRepo stadtRepo) {
 		return args -> {
 			try {
+				Stadt ka = new Stadt("Karlsruhe");
+				stadtRepo.save(ka);
+
 				Hochschule dhbw_ka = new Hochschule("DHBW KA");
+				dhbw_ka.setStadt(ka);
 				hochschuleRepo.save(dhbw_ka);
 
 				studentRepo.save(new Student("David", "Schulz", dhbw_ka));
@@ -33,6 +37,8 @@ public class DemoApplication {
 				//System.out.println(studentRepo.findMatrikelnummerMin().get());
 
 				System.out.println(hochschuleRepo.findByIdMitStudenten(1L).get().getStudenten());
+
+				System.out.println(hochschuleRepo.findById(1L).get());
 
 			} catch (DataIntegrityViolationException e) {
 			}

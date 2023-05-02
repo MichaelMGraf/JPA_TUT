@@ -15,6 +15,9 @@ public class Hochschule {
     @Column
     private String name;
 
+    @OneToOne
+    private Stadt stadt;
+
     @OneToMany(mappedBy = "hochschule")
     private Collection<Student> studenten;
 
@@ -23,6 +26,14 @@ public class Hochschule {
     }
 
     public Hochschule() {
+    }
+
+    public Stadt getStadt() {
+        return stadt;
+    }
+
+    public void setStadt(Stadt stadt) {
+        this.stadt = stadt;
     }
 
     public void setStudenten(Collection<Student> studenten) {
@@ -38,6 +49,7 @@ public class Hochschule {
         return "Hochschule{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", stadt='" + stadt + '\'' +
                 '}';
     }
 }

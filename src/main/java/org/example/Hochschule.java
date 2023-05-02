@@ -15,7 +15,7 @@ public class Hochschule {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "hochschule", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "hochschule")
     private Collection<Student> studenten;
 
     public Hochschule(String name) {

@@ -32,7 +32,7 @@ public class DemoApplication {
 				System.out.println(studentRepo.findByMatrikelnummer(5291383).get());
 				//System.out.println(studentRepo.findMatrikelnummerMin().get());
 
-				System.out.println(hochschuleRepo.findById(1L).get().getStudenten());
+				System.out.println(hochschuleRepo.findByIdMitStudenten(1L).get().getStudenten());
 
 			} catch (DataIntegrityViolationException e) {
 			}

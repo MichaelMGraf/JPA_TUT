@@ -1,5 +1,9 @@
 package org.example;
 
+import org.example.aufgabe.Dozent;
+import org.example.aufgabe.DozentRepo;
+import org.example.aufgabe.Kurs;
+import org.example.aufgabe.KursRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +21,8 @@ public class DemoApplication {
 
 
 	@Bean
-	CommandLineRunner commandLineRunner (StudentRepo studentRepo, HochschuleRepo hochschuleRepo, StadtRepo stadtRepo) {
+	CommandLineRunner commandLineRunner (StudentRepo studentRepo, HochschuleRepo hochschuleRepo, StadtRepo stadtRepo,
+										 DozentRepo dozentRepo, KursRepo kursRepo) {
 		return args -> {
 			try {
 				Stadt ka = new Stadt("Karlsruhe");
@@ -46,10 +51,27 @@ public class DemoApplication {
 				dhbw_ma.setStadt(mannheim);
 				hochschuleRepo.save(dhbw_ma);
 
+				aufgabe(dozentRepo, kursRepo);
+
 			} catch (DataIntegrityViolationException e) {
 				e.printStackTrace();
 			}
 		};
 	}
 
+	private void aufgabe(DozentRepo dozentRepo, KursRepo kursRepo) {
+		Dozent dozent1 = new Dozent("Dieter", "Rolf");
+		Dozent dozent2 = new Dozent("Rolf", "Dieter");
+		dozentRepo.save(dozent1);
+		dozentRepo.save(dozent2);
+
+		Kurs mathe = new Kurs("Mathe", dozent1);
+		Kurs theoInf = new Kurs("Theoretische Informatik I", dozent1);
+
+		kursRepo.save(mathe);
+		kursRepo.save(theoInf);
+
+		Optional<Dozent> dozentR = dozentRepo.findByIdMitKursen(1L);
+		System.out.println(dozentR.get());
+	}
 }

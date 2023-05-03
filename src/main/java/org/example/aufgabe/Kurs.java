@@ -1,22 +1,39 @@
 package org.example.aufgabe;
 
 
-//TODO Ein Repository erzeugen welches ein Objekt speichern kann, ein Objekt per ID finden kann
+import jakarta.persistence.*;
 
-//TODO Datenbankentität
+@Entity
 public class Kurs {
 
-    //TODO automatisch generierter Primärschlüssel
+    @Id
+    @GeneratedValue
     private Long id;
 
-    //TODO Datenbankattribut, welches nicht null sein darf
+    @Column(nullable = false)
     private String name;
 
-    //TODO Datenbankattribut, welches nicht null sein darf
-
+    @Column(nullable = false)
     private short jahr;
 
-    //TODO Beziehung zu einem Dozent, welches nicht null sein darf und sofort mitgeladen werden soll
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Dozent dozent;
 
+
+    public Kurs(String name, Dozent dozenten) {
+        this.name = name;
+        this.dozent = dozenten;
+    }
+
+    public Kurs() {
+    }
+
+    @Override
+    public String toString() {
+        return "Kurs{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                //", dozent=" + dozenten +
+                '}';
+    }
 }

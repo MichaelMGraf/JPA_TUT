@@ -1,23 +1,48 @@
 package org.example.aufgabe;
 
 
+import jakarta.persistence.*;
+
+import java.util.Arrays;
 import java.util.List;
 
-//TODO Ein Repository erzeugen welches ein Objekt speichern kann, ein Objekt per ID finden kann
-// (einmal mit und einmal ohne der Liste an Kursen)
-
-//TODO Datenbankentität
+@Entity
 public class Dozent {
 
-    //TODO automatisch generierter Primärschlüssel
+    @Id
+    @GeneratedValue
     private Long id;
 
-    //TODO Datenbankattribut, welches nicht null sein darf
+    @Column(nullable = false)
     private String vorname;
 
-    //TODO Datenbankattribut, welches nicht null sein darf
+    @Column(nullable = false)
     private String nachname;
 
-    //TODO Beziehung zu mehreren Kursen, welches nicht mitgeladen werden soll
+    @OneToMany(mappedBy = "dozent", fetch = FetchType.LAZY)
     private List<Kurs> kurse;
+
+
+    public Dozent(String vorname, String nachname, Kurs... kurse) {
+        this.vorname = vorname;
+        this.nachname = nachname;
+        this.kurse = Arrays.asList(kurse);
+    }
+
+    public Dozent() {
+    }
+
+    public void setKurse(List<Kurs> kurse) {
+        this.kurse = kurse;
+    }
+
+    @Override
+    public String toString() {
+        return "Dozent{" +
+                "id=" + id +
+                ", vorname='" + vorname + '\'' +
+                ", nachname='" + nachname + '\'' +
+                ", kurse=" + kurse +
+                '}';
+    }
 }
